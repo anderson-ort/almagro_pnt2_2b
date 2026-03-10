@@ -17,7 +17,7 @@ Podés acceder a los videos de las clases desde el siguiente enlace:
 
 ## Un recordatorio para todos los programadores
 
-![Clean Code]([assets/clean_code.png](https://github.com/ryanmcdermott/clean-code-javascript.git))
+🔗[Clean Code]([assets/clean_code.png](https://github.com/ryanmcdermott/clean-code-javascript.git))
 
 📩 **Contacto**  
 Ante cualquier duda, podés escribirme por el foro del aula o también a mi correo:  
