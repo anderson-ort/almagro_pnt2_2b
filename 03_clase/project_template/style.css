@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #111;
+    color: #fff;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    height: 100vh;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Izquierda - video */
+.left {
+    flex: 1;
+    overflow: hidden;
+    /* border-right: 2px solid #ff6b6b; */
+}
+
+.bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Derecha */
+.right {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.band-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.band-info h1 {
+    font-size: 2rem;
+    color: #bb0000;
+}
+
+.logo {
+    width: 100px;
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+    /* border: 2px solid #ff6b6b; */
+}
+
+/* Tickets con opacidad */
+.tickets {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ticket {
+    background: rgba(255, 107, 107, 0.1);
+    /* border: 2px solid #ff6b6b; */
+    border-radius: 12px;
+    padding: 1rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.ticket:hover {
+    background: rgba(255, 107, 107, 0.2);
+    transform: translateY(-5px);
+}
+
+.status {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    background: #ff6b6b;
+    color: #111;
+    font-weight: bold;
+}
+
+/* botones */
+
+[class^="btn-"] {.next-shows .logo
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 18px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+[class^="btn-"]:hover {
+    background-color: #45a049;
+}
+
+
+/* mensaje */
+.mensaje {
+    margin-top: 10px;
+    padding: 8px;
+    font-weight: bold;
+    color: white;
+}
+
+
+.shows-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shows-display>* {
+    margin: 2rem;
+}
+
+
+.shows-display > .logo:hover{
+    cursor: pointer;
+}
+
+
+/* shows */
+.next-shows {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    padding: 10px;
+    gap: 1rem;
+    margin-top: 1rem;
+    max-height: 300px; /* altura máxima */
+    overflow-y: auto;  /* scroll solo si supera max-height */
+}
+
+.show-item {
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid #ff6b6b;
+    border-radius: 12px;
+    padding: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.show-item:hover {
+    background: rgba(255, 107, 107, 0.2);
+    transform: translateY(-5px);
+}
+
+.show-item h3 {
+    margin: 0;
+    color: #ff6b6b;
+}
+
+.show-item p {
+    margin: 0.2rem 0 0;
+    font-size: 0.9rem;
+    color: #ddd;
+}
+

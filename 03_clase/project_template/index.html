@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./asset/pics/orbit.png" type="image/x-icon">
+    <title> Andru & 4th Orbit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Video background -->
+        <div class="left">
+            <video autoplay muted loop class="bg-video">
+                <source src="./asset/media/rack.mp4" type="video/mp4">
+                Video No available! Sorry!
+            </video>
+        </div>
+
+        <!-- Tickets -->
+        <div class="right">
+            <div class="band-info">
+                <h1>Andru & 4th Orbit</h1>
+                <img src="./asset/pics/andru_4_orbit.png" alt="logo" class="logo">
+            </div>
+
+            <div class="tickets">
+
+                <div class="ticket baires">
+                    <h2>Buenos Aires</h2>
+                    <p>Fechas: 12/11/2025</p>
+
+                    <span class="status">Entradas disponibles <i class="counter"></i></span>
+                    <button class="btn-email" data-ciudad="Buenos Aires">Comprar por Email</button>
+                    <button class="btn-whatsapp" data-ciudad="Buenos Aires">Comprar por WhatsApp</button>
+                    <div class="mensaje"></div>
+                </div>
+
+                <div class="ticket rosario">
+                    <h2>Córdoba</h2>
+                    <p>Fechas: 20/11/2025</p>
+                    <span class="status">Entradas disponibles <i class="counter"></i></span>
+                    <button class="btn-email" data-ciudad="Buenos Aires">Comprar por Email</button>
+                    <button class="btn-whatsapp" data-ciudad="Buenos Aires">Comprar por WhatsApp</button>
+                    <div class="mensaje"></div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div class="shows-display">
+                        <span>Click en el logo para ver mas shows!</span>
+                        <img src="./asset/pics/andru_4_orbit.png" alt="logo" class="logo">
+                    </div>
+                    <div class="next-shows"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
