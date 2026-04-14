@@ -1,0 +1,87 @@
+:root {
+  --color-primary: #6366F1;
+  --color-surface: #0B1120;
+  --color-surface-light: #111827;
+  --color-card: rgba(17, 24, 39, 0.85);
+
+  --color-text: #F9FAFB;
+  --color-text-muted: #9CA3AF;
+
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+
+  --color-neutral-100: #1F2937;
+  --color-neutral-200: #374151;
+
+  --font-primary: 'Roboto', sans-serif;
+  --font-display: 'Poppins', sans-serif;
+
+  --spacing-1: 8px;
+  --spacing-2: 16px;
+  --spacing-3: 24px;
+  --spacing-4: 32px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 8px 20px rgba(0,0,0,0.35);
+}
+
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+}
+
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.hero {
+  height: 100vh;
+  width: 100%;
+
+  background-image: url('/book-shelf.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 7, 18, 0.78);
+  backdrop-filter: blur(2px);
+}
+
+
+.overlay {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.overlay h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #818CF8;
+  margin-bottom: 1rem;
+}
+
+.overlay p {
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+}
