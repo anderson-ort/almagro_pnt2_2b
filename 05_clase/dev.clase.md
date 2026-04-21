@@ -34,60 +34,32 @@ Se vio el renderizado de listas con `v-for` y la importancia de `:key`, el bindi
 | `provide` / `inject` | Alternativa a pasar props en cadenas largas |
 | Vitest + Vue Test Utils | Tests unitarios de componentes |
 
----
 
-## Resumen del proyecto
+## 2. Arquitectura: "El Cerebro y los Músculos"
+Separamos las responsabilidades para no tener un código espagueti. 
 
-Vamos a evolucionar la **Biblioteca Digital**. El objetivo es romper el "Componente Dios" (`CatalogoLibros.vue`) en piezas atómicas y extraer la lógica de negocio a funciones puras. 
-- **UI:** Componentes especializados con Props, Emits y Slots.
-- **Lógica:** Creación de nuestro primer Composable para manejar los datos.
 
-Este es el salto de "hacer que funcione" a "diseñar software".
 
----
-
-## Objetivos de aprendizaje por etapa
-
-| Etapa | Tiempo | Conceptos | Entregable |
-|-------|--------|-----------|-------------|
-| 1. Átomos de UI | 20 min | `defineProps`, `defineEmits` | `LibroCard.vue` independiente |
-| 2. Contenedores | 15 min | Slots (Contenido arbitrario) | `BaseCard.vue` o `Alerta.vue` |
-| 3. Abstracción | 25 min | Composables (Logic extraction) | `useLibros.js` funcionando |
-| 4. Integración | 15 min | Comunicación Padre-Hijo | App funcionando refactorizada |
-| 5. Code Review | 15 min | Calidad de código | PR con refactor listo |
+* **Composables (Cerebro):** Manejan el estado y la lógica de negocio (el "qué hace").
+* **Componentes (Músculos):** Se encargan de la UI y de interactuar con el usuario (el "cómo se ve").
+* **App.vue (Director de Orquesta):** Une las piezas.
 
 ---
 
-## Estructura final del proyecto (Arquitectura Limpia)
+## 3. Desarrollo Paso a Paso
 
-```
-mi-biblioteca/
-├── src/
-│   ├── components/
-│   │   ├── LibroCard.vue   ← Presentación (Dumb Component)
-│   │   └── BaseModal.vue   ← Reutilización con Slots
-│   ├── composables/
-│   │   └── useLibros.js    ← El "cerebro" de la lógica
-│   ├── App.vue
-│   └── ...
-```
-
----
-
-## Desarrollo paso a paso
-
-### Etapa 1: El Componente de Presentación (20 min)
-
-**Explicación "Senior":** *"Un componente no debería saber de dónde vienen los datos, solo cómo mostrarlos. Vamos a pasarle el libro por `props` y avisar que queremos reservar con un `emit`. Si intentás modificar una prop desde el hijo, Vue te va a sacar a patadas: el flujo es unidireccional."*
-
-**Nuevo archivo: `src/components/LibroCard.vue`**
+### Etapa 1: El Componente de Presentación (`LibroCard.vue`)
+**Concepto:** Es un "Dumb Component". Recibe datos por `props` y avisa acciones por `emits`.
 
 ```vue
 <template>
   <div class="card">
     <h3>{{ libro.titulo }}</h3>
     <p>Autor: {{ libro.autor }}</p>
-    <slot name="badge"></slot> <button 
+    
+    <slot name="etiqueta"></slot>
+
+    <button 
       @click="$emit('intentar-reserva', libro.id)" 
       :disabled="libro.stock === 0"
     >
@@ -97,132 +69,168 @@ mi-biblioteca/
 </template>
 
 <script setup>
-// Definimos qué entra (Props)
 defineProps({
-  libro: {
-    type: Object,
-    required: true
-  }
+  libro: { type: Object, required: true }
 })
-
-// Definimos qué sale (Emits)
+// Definimos los eventos que este componente puede disparar
 defineEmits(['intentar-reserva'])
 </script>
 
 <style scoped>
 .card { border: 1px solid #ccc; padding: 1rem; margin: 0.5rem; border-radius: 8px; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
 </style>
 ```
 
 ---
 
-### Etapa 2: Slots - Flexibilidad total (15 min)
+### Etapa 2: Slots y Reutilización (`BaseModal.vue`)
+**Concepto:** Creamos un componente "cáscara". El padre decide qué poner adentro usando Slots.
 
-**Explicación:** *"A veces no sabés qué vas a meter adentro de un componente (un texto, un icono, otro componente). Para eso están los Slots. Es como dejar un 'agujero' en el HTML para que el padre lo llene."*
-
-**Modificar `LibroCard.vue` agregando el slot arriba del botón:**
 ```vue
-<div v-if="libro.stock < 3" class="alerta-stock">
-  <slot name="footer">⚠️ ¡Últimas unidades!</slot>
-</div>
+<template>
+  <div class="modal-overlay" @click.self="$emit('close')">
+    <div class="modal-content">
+      <header>
+        <slot name="header"><h3>Aviso</h3></slot>
+        <button @click="$emit('close')">X</button>
+      </header>
+      
+      <section class="modal-body">
+        <slot></slot>
+      </section>
+    </div>
+  </div>
+</template>
+
+<script setup>
+defineEmits(['close'])
+</script>
+
+<style scoped>
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
+}
+.modal-content { background: white; padding: 20px; border-radius: 12px; min-width: 300px; }
+header { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+.modal-body { padding: 20px 0; }
+</style>
 ```
 
 ---
 
-### Etapa 3: El Composable - El cerebro (25 min)
-
-**Explicación:** *"¿Por qué la lógica de reservar tiene que estar pegada al HTML? Si mañana queremos usar la misma lógica en una app de mobile, estamos al horno. Vamos a encapsular el estado y las funciones en un Composable."*
-
-**Crear `src/composables/useLibros.js`**
+### Etapa 3: El Composable (`useLibros.js`)
+**Concepto:** Extraemos la lógica. El componente ya no sabe de dónde vienen los datos, solo los usa.
 
 ```javascript
 import { ref, computed } from 'vue'
+import datosLibros from '../data/mockData.json'
 
 export function useLibros() {
-  const libros = ref([
-    { id: 1, titulo: 'El Quijote', autor: 'Cervantes', stock: 5 },
-    { id: 2, titulo: '1984', autor: 'Orwell', stock: 2 }
-  ])
+  const libros = ref(datosLibros)
+  const filtro = ref('')
+  const reservasUsuario = ref(0)
+  const MAX_RESERVAS = 3
 
-  const totalStock = computed(() => 
-    libros.value.reduce((acc, libro) => acc + libro.stock, 0)
-  )
+  const librosFiltrados = computed(() => {
+    if (!filtro.value) return libros.value
+    return libros.value.filter(l => 
+      l.titulo.toLowerCase().includes(filtro.value.toLowerCase())
+    )
+  })
 
   function reservarLibro(id) {
+    if (reservasUsuario.value >= MAX_RESERVAS) return false 
+
     const libro = libros.value.find(l => l.id === id)
     if (libro && libro.stock > 0) {
       libro.stock--
+      reservasUsuario.value++
+      return true
     }
+    return false
   }
 
-  // Exponemos solo lo necesario
-  return {
-    libros,
-    totalStock,
-    reservarLibro
-  }
+  return { filtro, librosFiltrados, reservasUsuario, MAX_RESERVAS, reservarLibro }
 }
 ```
 
 ---
 
-### Etapa 4: Integración en el Padre (15 min)
-
-**Refactorizar `App.vue` (o `CatalogoLibros.vue`):**
+### Etapa 4: Integración en `App.vue`
+**Concepto:** Unimos todo. Fíjate cómo usamos los slots con `#` (shorthand de `v-slot`).
 
 ```vue
 <template>
   <main>
-    <h1>Biblioteca (Stock total: {{ totalStock }})</h1>
+    <h1>Biblioteca Digital</h1>
     
+    <div class="stats">
+      Reservas: <strong>{{ reservasUsuario }} / {{ MAX_RESERVAS }}</strong>
+    </div>
+
+    <input v-model="filtro" placeholder="Buscar libro..." class="filtro-input" />
+
     <div class="grid">
       <LibroCard 
-        v-for="l in libros" 
+        v-for="l in librosFiltrados" 
         :key="l.id" 
         :libro="l"
-        @intentar-reserva="reservarLibro"
+        @intentar-reserva="handleReserva"
       >
-        <template #footer v-if="l.stock === 1">
-          <span class="urgente">¡CORRE QUE SE ACABA!</span>
+        <template #etiqueta v-if="l.stock < 3 && l.stock > 0">
+          <span class="warning">¡Casi agotado!</span>
         </template>
       </LibroCard>
     </div>
+
+    <BaseModal v-if="mostrarError" @close="mostrarError = false">
+      <template #header><h3 style="color: red">¡Límite alcanzado!</h3></template>
+      
+      <p>Ya tenés {{ MAX_RESERVAS }} reservas activas. Dejá algo para el resto, boludo.</p>
+    </BaseModal>
   </main>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import LibroCard from './components/LibroCard.vue'
+import BaseModal from './components/BaseModal.vue'
 import { useLibros } from './composables/useLibros'
 
-const { libros, totalStock, reservarLibro } = useLibros()
+const { filtro, librosFiltrados, reservasUsuario, MAX_RESERVAS, reservarLibro } = useLibros()
+const mostrarError = ref(false)
+
+const handleReserva = (id) => {
+  const exito = reservarLibro(id)
+  if (!exito && reservasUsuario.value >= MAX_RESERVAS) {
+    mostrarError.value = true
+  }
+}
 </script>
 ```
 
 ---
 
-## Preguntas para disparar debate
+## 4. Tabla de Errores Comunes (Para no mandarse macanas)
 
-1. **¿Por qué no puedo hacer `props.libro.stock--` adentro de `LibroCard`?**
-   *"Porque rompés la 'Single Source of Truth'. El hijo no manda, el hijo obedece y avisa."*
-
-2. **¿Cuál es la diferencia entre un Composable y un archivo `.js` común?**
-   *"El Composable usa la Reactivity API (`ref`, `computed`). Es código de JS que Vue 'entiende' y puede reaccionar a sus cambios."*
-
-3. **¿Cuándo un componente es 'demasiado grande'?**
-   *"Si tenés que scrollear tres veces para ver el final del `<script setup>`, ya te pasaste de rosca. Ponete las pilas y dividilo."*
+| Situación | Error Común | Consecuencia | Solución |
+|-----------|-------------|--------------|----------|
+| **Props** | Intentar hacer `props.libro.stock--` | Error de "Set" en consola. Vue protege la inmutabilidad de las props. | El hijo **emite** un evento; el padre (o el composable) cambia el dato. |
+| **Slots** | Poner contenido en el hijo sin usar `<template #nombre>` | El contenido no aparece o se pisa con el slot por defecto. | Asegurarse que el nombre del slot en el `template` del padre coincida con el `name` en el hijo. |
+| **Composables** | Olvidar el `return` de una variable | La variable será `undefined` en el componente. | Siempre retornar un objeto con todo lo que el componente necesite usar. |
+| **V-bind** | Escribir `libro="l"` en vez de `:libro="l"` | Le pasás el texto "l" literal en lugar del objeto del bucle. | No te olvides de los dos puntos (`:`) para binding dinámico. |
 
 ---
 
-## Errores comunes (Para que no se manden macanas)
-
-| Error | Consecuencia | Solución |
-|-------|---------|----------|
-| Prop Mutation | Warning gigante en consola y estado inconsistente. | Usar `emit` para que el padre cambie el dato. |
-| Olvidar exportar en Composable | `undefined` al intentar usar la función. | Siempre retornar un objeto con las variables y funciones. |
-| No usar `v-bind` (`:`) | Pasás un string literal "l" en vez del objeto libro. | Usar `:libro="l"` para pasar la variable real. |
+## Debate: ¿Cuándo un componente es "demasiado grande"?
+Si el `<template>` tiene más de 100 líneas o el `<script setup>` maneja 5 lógicas distintas (filtrado, login, carrito, etc.), **ponete las pilas y dividilo**. La regla de oro: un componente debería hacer una sola cosa bien.
 
 ---
 
 ## Recursos adicionales
 - [Vue Patterns: Props & Emits](https://vuejs.org/guide/components/props.html)
 - [Mastering Composables](https://vueschool.io/articles/vuejs-tutorials/what-is-a-vue-js-composable/)
+
