@@ -40,7 +40,7 @@ mi-biblioteca/
 
 ---
 
-## Desarrollo paso a paso (para el docente)
+## Desarrollo paso a paso
 
 ### Etapa 1: Setup (10 min)
 
@@ -334,7 +334,7 @@ Cumple con los requisitos base del cliente para validar la idea.
 
 ---
 
-## Recursos para compartir con estudiantes
+## Recursos
 
 - [Documentación oficial de Vue - Reactividad](https://vuejs.org/guide/essentials/reactivity-fundamentals.html)
 - [Playground interactivo](https://play.vuejs.org/) - para experimentar
