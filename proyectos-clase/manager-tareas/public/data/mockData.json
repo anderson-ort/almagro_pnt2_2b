@@ -1,0 +1,55 @@
+{
+    "boardName": "Desarrollo Core - Sprint 1",
+    "tasks": [
+        {
+            "id": 101,
+            "titulo": "Configurar Middleware de Multitenancy",
+            "prioridad": "Alta",
+            "infodeDevelopers": {
+                "nombre": "Anderson",
+                "email": "anderson@dev.com"
+            },
+            "comentarioHTML": "<div><p>Es <strong>crítico</strong> asegurar el aislamiento de datos entre clientes.</p><p>Revisar las políticas de RLS en la base de datos. 🛡️</p></div>"
+        },
+        {
+            "id": 102,
+            "titulo": "Optimización de Embeddings para Búsqueda",
+            "prioridad": "Media Alta",
+            "infodeDevelopers": {
+                "nombre": "Lourdes",
+                "email": "lourdes@dev.com"
+            },
+            "comentarioHTML": "<ul><li>Reducir dimensionalidad</li><li>Validar latencia en el endpoint de búsqueda semántica</li></ul>"
+        },
+        {
+            "id": 103,
+            "titulo": "Refactorizar estilos del Dashboard",
+            "prioridad": "Baja",
+            "infodeDevelopers": {
+                "nombre": "Cacho",
+                "email": "cacho@gmail.com"
+            },
+            "comentarioHTML": "<p>Ajustar el <em>padding</em> de las cards para que respiren un poco más. Menos es más. ✨</p>"
+        },
+        {
+            "id": 104,
+            "titulo": "Implementar Webhooks de Pagos",
+            "prioridad": "Alta",
+            "infodeDevelopers": {
+                "nombre": "Maria",
+                "email": "maria@gmail.com"
+            },
+            "comentarioHTML": "<div><p>Ojo con los reintentos automáticos. No queremos cobrar doble por error. 💸</p><strong>Urgente para producción.</strong></div>"
+        },
+        {
+            "id": 105,
+            "titulo": "Migración de logs a ELK Stack",
+            "prioridad": "Media Baja",
+            "infodeDevelopers": {
+                "nombre": "Andru",
+                "email": "andru@ops.com"
+            },
+            "comentarioHTML": "<span>Solo falta mapear los campos de error de los contenedores de Docker.</span>"
+        }
+    ]
+}
