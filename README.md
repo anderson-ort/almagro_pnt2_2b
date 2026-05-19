@@ -1,4 +1,4 @@
-**👨‍🏫 Docente: Anderson Ocaña**  
+** Docente: Anderson Ocaña**  
 
 **Módulo: Front End**
 

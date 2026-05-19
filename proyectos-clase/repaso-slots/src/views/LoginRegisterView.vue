@@ -1,6 +1,7 @@
 <script setup>
 import {reactive} from 'vue'
 import { useAuthForm } from '../composables/useAuthForm.js'
+
 const { form, submit, toggleMode } = useAuthForm()
 
 

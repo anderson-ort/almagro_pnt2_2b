@@ -18,7 +18,7 @@ export const useAuthForm = () => {
     })
 
 
-    const validateForm = () => (form.email === '' || form.password === '')
+    const isValidForm = () => (!form.email.trim() || !form.password.trim())
 
 
     const login = async () => {
@@ -34,16 +34,22 @@ export const useAuthForm = () => {
 
 
     const submit = async () => {
-        if (!validateForm()) return
+        console.log("Click session activada")
+
+        console.log({email:form.email,pass: form.password})
+        
+        if (isValidForm()) return
 
         form.loading = true
         form.error = ''
 
         if (form.isLogin) {
+            console.log("SignIn Process")
             await login()
             return
         }
 
+        console.log("Register Process")
         await register()
 
         form.loading = false

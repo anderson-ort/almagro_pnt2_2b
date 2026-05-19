@@ -1,6 +1,14 @@
 <script setup>
 import Card from '../components/Card.vue'
 import {ref} from 'vue'
+import {useAuth} from '../composables/useAuth.js'
+import { useRouter } from 'vue-router'
+ 
+
+
+// para cuando el usuario esta autenticado
+const { isAuthenticated, signOut, user } = useAuth()
+const router = useRouter()
 
 
 const tarjetitas = ref([])
@@ -41,6 +49,19 @@ tarjetitas.value = [
 ];
 
 
+// solo cuando esta authenticado o el usuario esta disponible en la app
+const handleSignOut = async () => {
+
+  try {
+    await signOut()
+    router.push("/")
+    console.log('Sesion cerrada')
+
+  } catch (error) {
+  }
+}
+
+
 
 const infoDesdeElHijo = (card) =>{
   console.log(`Me acciono el hijo! -> ${card.precio} -> ${card.nombre}`)
@@ -48,10 +69,27 @@ const infoDesdeElHijo = (card) =>{
 
 const logAlert = ({header}) => {alert(header)}
 
+
+
+
 </script>
 
 <template>
-  <h1> Mostrar Tarjetas </h1>
+    <h1> Mostrar Tarjetas </h1>
+    
+    <div v-if="isAuthenticated">
+    
+    <p>
+    Usuario autenticado:
+    {{ user?.email }}
+    </p>
+    
+    <button @click="handleSignOut">
+    Sign Out
+    </button>
+    
+    </div>
+  
   <hr/>
   
 
