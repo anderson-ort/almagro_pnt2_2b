@@ -1,0 +1,12 @@
+{
+  "active": 1,
+  "next_id": 2,
+  "windows": [
+    {
+      "id": 1,
+      "label": "almagro_pnt2_2b",
+      "root": "/home/ander/ort/almagro_pnt2_2b",
+      "plugin_state": {}
+    }
+  ]
+}
