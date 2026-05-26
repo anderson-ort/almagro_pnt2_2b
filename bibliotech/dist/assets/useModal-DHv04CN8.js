@@ -1,0 +1,1 @@
+import{l as o}from"./index-Cz5meNey.js";function f(){const l=o(!1),e=o(null);function n(t=null){e.value=t,l.value=!0}function u(){l.value=!1,e.value=null}function a(){l.value?u():n()}return{isOpen:l,data:e,open:n,close:u,toggle:a}}export{f as u};

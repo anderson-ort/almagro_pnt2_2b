@@ -1,0 +1,74 @@
+[
+  {
+    "id": "book-1",
+    "titulo": "El Señor de los Anillos",
+    "autor": "J.R.R. Tolkien",
+    "isbn": "978-0-618-64015-7",
+    "genero": "Fantasía",
+    "descripcion": "Una épica historia de aventura y lucha entre el bien y el mal en la Tierra Media.",
+    "portada": "https://covers.openlibrary.org/b/isbn/9780618640157-L.jpg",
+    "unidades_totales": 3,
+    "unidades_disponibles": 2,
+    "created_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "book-2",
+    "titulo": "Cien Años de Soledad",
+    "autor": "Gabriel García Márquez",
+    "isbn": "978-0-06-088328-7",
+    "genero": "Realismo Mágico",
+    "descripcion": "La saga de la familia Buendía a lo largo de siete generaciones en el pueblo de Macondo.",
+    "portada": "https://covers.openlibrary.org/b/isbn/9780060883287-L.jpg",
+    "unidades_totales": 2,
+    "unidades_disponibles": 1,
+    "created_at": "2024-01-02T00:00:00Z"
+  },
+  {
+    "id": "book-3",
+    "titulo": "1984",
+    "autor": "George Orwell",
+    "isbn": "978-0-452-28423-4",
+    "genero": "Distopía",
+    "descripcion": "Una visión aterradora de un futuro totalitario donde el Gran Hermano lo vigila todo.",
+    "portada": "https://covers.openlibrary.org/b/isbn/9780452284234-L.jpg",
+    "unidades_totales": 4,
+    "unidades_disponibles": 4,
+    "created_at": "2024-01-03T00:00:00Z"
+  },
+  {
+    "id": "book-4",
+    "titulo": "Don Quijote de la Mancha",
+    "autor": "Miguel de Cervantes",
+    "isbn": "978-84-376-0494-7",
+    "genero": "Clásico",
+    "descripcion": "Las aventuras del ingenioso hidalgo Don Quijote y su fiel escudero Sancho Panza.",
+    "portada": "https://covers.openlibrary.org/b/isbn/9788437604947-L.jpg",
+    "unidades_totales": 2,
+    "unidades_disponibles": 0,
+    "created_at": "2024-01-04T00:00:00Z"
+  },
+  {
+    "id": "book-5",
+    "titulo": "Harry Potter y la Piedra Filosofal",
+    "autor": "J.K. Rowling",
+    "isbn": "978-84-7888-355-3",
+    "genero": "Fantasía",
+    "descripcion": "El comienzo de la mágica aventura de Harry Potter en el mundo de la magia.",
+    "portada": "https://covers.openlibrary.org/b/isbn/9788478883554-L.jpg",
+    "unidades_totales": 5,
+    "unidades_disponibles": 3,
+    "created_at": "2024-01-05T00:00:00Z"
+  },
+  {
+    "id": "book-6",
+    "titulo": "El Principito",
+    "autor": "Antoine de Saint-Exupéry",
+    "isbn": "978-84-261-3283-8",
+    "genero": "Fábula",
+    "descripcion": "Un pequeño príncipe viaja por el universo aprendiendo sobre la vida y el amor.",
+    "portada": "https://covers.openlibrary.org/b/isbn/9788426132833-L.jpg",
+    "unidades_totales": 3,
+    "unidades_disponibles": 2,
+    "created_at": "2024-01-06T00:00:00Z"
+  }
+]

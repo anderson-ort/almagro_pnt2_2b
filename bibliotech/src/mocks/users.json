@@ -1,0 +1,20 @@
+[
+  {
+    "id": "user-1",
+    "email": "admin@bibliotech.com",
+    "nombre": "Admin BiblioTech",
+    "rol": "admin"
+  },
+  {
+    "id": "user-2",
+    "email": "lector@bibliotech.com",
+    "nombre": "Juan Lector",
+    "rol": "lector"
+  },
+  {
+    "id": "user-3",
+    "email": "maria@bibliotech.com",
+    "nombre": "María García",
+    "rol": "lector"
+  }
+]
