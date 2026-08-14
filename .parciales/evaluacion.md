@@ -1,4 +1,3 @@
----
 ### Descripción del Parcial – Vue.js  NT2B Almagro - Yatay
 
 **Este parcial está diseñado para evaluar los conocimientos fundamentales sobre el desarrollo de aplicaciones modernas con Vue.js. A lo largo de esta evaluación se abordarán temas prácticos como el uso de la Composition API, la creación de directivas personalizadas, manipulación de objetos y arrays en JavaScript, funciones asíncronas, template literals, y la configuración de rutas con vue-router.**
@@ -46,7 +45,6 @@ D) `$data.miPropiedad`
 
 **Retroalimentacion general:** En Composition API, las propiedades reactivas creadas con `ref` requieren el uso de `.value` para acceder a su valor dentro de `setup` o metodos del componente. No se utiliza `this` como en Options API.
 
----
 
 ## Pregunta 2: Directivas personalizadas (Opción múltiple, múltiples respuestas)
 
